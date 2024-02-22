@@ -1,10 +1,12 @@
 import { describe, it, expect } from "vitest";
 import DataStore from "./index";
 import { randomBytes } from "@noble/hashes/utils";
+import "dotenv/config";
 
-// https://www.dropbox.com/developers/apps
-const accessToken =
-  "sl.BwELvrZDcwCC2rhPbvrg6WRG2Ahr5vjSM7LNyXDd7EUhlfAoVQ-9rb3FEdWm_Pj45zT7BMpjA573iRGCtO3R6-ScTdkPnvklWEK5ivIkXB8fE3nOKpUHpH1aefA4_ne7F0Ns3AH-S2PJXFo";
+const accessToken = process.env.DROPBOX_ACCESS_TOKEN;
+if (!accessToken) {
+  throw "You haven't defined a dropbox access token! See the Readme for more information.";
+}
 
 describe(`Main`, () => {
   it("post and receive data", async () => {
